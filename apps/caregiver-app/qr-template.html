@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Abrir no celular — IrisFlow Cuidador</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: #0b1220; color: #e7ecf5;
+    font: 14px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 32px 16px 56px;
+  }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  .sub { color: #8fa0bd; margin: 0 0 28px; font-size: 13px; }
+  .cartoes { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .cartao {
+    background: #131c2e; border: 1px solid #26334a; border-radius: 16px;
+    padding: 22px; width: 340px;
+  }
+  .cartao h2 { font-size: 15px; margin: 0 0 4px; }
+  .cartao .quando { color: #8fa0bd; font-size: 12.5px; margin: 0 0 16px; }
+  .qr { background: #fff; border-radius: 10px; padding: 10px; display: grid; place-items: center; }
+  .qr svg { display: block; width: 100%; height: auto; max-width: 300px; }
+  .url {
+    margin-top: 14px; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px;
+    color: #cfe0ff; background: #0d1522; border: 1px solid #26334a;
+    border-radius: 8px; padding: 8px 10px; text-align: center; word-break: break-all;
+  }
+  ol { margin: 14px 0 0; padding-left: 20px; color: #b9c6dd; font-size: 12.5px; }
+  li { margin-bottom: 5px; }
+  .rodape { margin-top: 30px; max-width: 620px; text-align: center; color: #8fa0bd; font-size: 12.5px; }
+  b { color: #e7ecf5; }
+</style>
+</head>
+<body>
+
+<h1>IrisFlow Cuidador — abrir no celular</h1>
+<p class="sub">O computador e o celular precisam estar no mesmo Wi-Fi.</p>
+
+<div class="cartoes">
+
+  <div class="cartao">
+    <h2>Expo Go — app nativo</h2>
+    <p class="quando">Vibração, notificações e comportamento real de aparelho.</p>
+    <div class="qr">{{QR_EXP}}</div>
+    <div class="url">{{URL_EXP}}</div>
+    <ol>
+      <li><b>Android:</b> abra o Expo Go e escaneie por dentro dele, ou toque em <b>“Enter URL manually”</b> na aba Home.</li>
+      <li><b>iPhone:</b> use o app <b>Câmera</b> do sistema. O Expo Go para iOS não tem mais campo de URL manual.</li>
+    </ol>
+  </div>
+
+  <div class="cartao">
+    <h2>Navegador do celular</h2>
+    <p class="quando">Sem instalar nada. Não tem vibração nem push.</p>
+    <div class="qr">{{QR_WEB}}</div>
+    <div class="url">{{URL_WEB}}</div>
+    <ol>
+      <li>Escaneie com a câmera e abra no navegador.</li>
+      <li>É o mesmo código, rodando como web.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="rodape">
+  Se o celular não conectar, quase sempre é o <b>Firewall do Windows</b> bloqueando
+  a porta 8081 na rede privada — o computador responde a si mesmo, mas não ao
+  telefone.
+</p>
+
+</body>
+</html>

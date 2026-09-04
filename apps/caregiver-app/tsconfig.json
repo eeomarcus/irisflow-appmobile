@@ -1,0 +1,9 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "paths": { "@irisflow/comm-client": ["../../packages/comm-client/src/index.ts"] }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}

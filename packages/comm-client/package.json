@@ -1,0 +1,22 @@
+{
+  "name": "@irisflow/comm-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Camada de comunicacao paciente<->cuidador. Compartilhada entre o IrisFlow desktop (Electron) e o app do cuidador (Expo).",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@supabase/supabase-js": "^2.112.4"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.112.4",
+    "typescript": "~5.9.0",
+    "vitest": "^3.2.7"
+  }
+}

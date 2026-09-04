@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "IrisFlow Cuidador",
+    "slug": "irisflow-caregiver",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "irisflow",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#1B54A8"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.irisflow.caregiver",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      },
+      "entitlements": {
+        "//": "Alerta crítico fura o silencioso e o modo Foco. A Apple concede caso a caso, e a análise costuma demorar. Sem ele o app cai em time-sensitive automaticamente (ver push-fanout) e AVISA o cuidador na tela de status — em vez de deixar supor que vai ser acordado. Mantenha false até a Apple aprovar: declarar sem o direito faz a APNs REJEITAR a notificação inteira, e aí o cuidador não recebe nada.",
+        "com.apple.developer.usernotifications.critical-alerts": false
+      }
+    },
+    "android": {
+      "package": "com.irisflow.caregiver",
+      "adaptiveIcon": {
+        "backgroundColor": "#1B54A8"
+      },
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE",
+        "POST_NOTIFICATIONS",
+        "SCHEDULE_EXACT_ALARM"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "color": "#DC2626",
+          "//": "defaultChannel não substitui os canais criados em runtime (notifications.ts): os três níveis precisam de importância e bypassDnd diferentes."
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "extra": {
+      "//": "Preenchidos por EXPO_PUBLIC_* no .env, ou aqui para builds locais. A chave anônima é pública por natureza: quem protege os dados é a RLS.",
+      "supabaseUrl": null,
+      "supabaseAnonKey": null
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": null
+    }
+  }
+}

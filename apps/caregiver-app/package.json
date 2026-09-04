@@ -1,0 +1,36 @@
+{
+  "name": "irisflow-caregiver",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "type-check": "tsc --noEmit",
+    "web": "expo start --web",
+    "preview": "expo start --web --clear"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "~57.0.15",
+    "@irisflow/comm-client": "file:../../packages/comm-client",
+    "@supabase/supabase-js": "^2.112.4",
+    "expo": "^57.0.19",
+    "expo-constants": "~57.0.17",
+    "expo-device": "~57.0.1",
+    "expo-notifications": "~57.0.16",
+    "expo-secure-store": "~57.0.3",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-url-polyfill": "^2.0.0",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@types/react": "~18.3.12",
+    "typescript": "~5.6.3"
+  }
+}

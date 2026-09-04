@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>IrisFlow Cuidador — visualização mobile</title>
+<style>
+  :root {
+    --fundo: #0b1220;
+    --painel: #131c2e;
+    --borda: #26334a;
+    --texto: #e7ecf5;
+    --fraco: #8fa0bd;
+    --azul: #4d8ff0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(1200px 700px at 50% -10%, #1b2a45 0%, var(--fundo) 60%);
+    color: var(--texto);
+    font: 14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 16px 48px;
+  }
+
+  h1 { font-size: 19px; margin: 0 0 4px; font-weight: 700; letter-spacing: .2px; }
+  .sub { color: var(--fraco); font-size: 13px; margin: 0 0 20px; }
+
+  .barra {
+    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 22px;
+  }
+  button {
+    background: var(--painel); color: var(--texto);
+    border: 1px solid var(--borda); border-radius: 999px;
+    padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: inherit;
+  }
+  button:hover { border-color: var(--azul); }
+  button[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: #06101f; }
+
+  /* Moldura do aparelho. As medidas são os viewports CSS reais dos
+     aparelhos — é o que importa para julgar se o alvo de toque cabe. */
+  .aparelho {
+    position: relative;
+    border: 12px solid #05070c;
+    border-radius: 44px;
+    box-shadow: 0 30px 70px rgba(0,0,0,.6), 0 0 0 2px #1d2535;
+    background: #05070c;
+    transition: width .18s ease, height .18s ease;
+    flex: none;
+  }
+  .entalhe {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 108px; height: 24px; background: #05070c;
+    border-radius: 0 0 14px 14px; z-index: 3; pointer-events: none;
+  }
+  iframe {
+    display: block; width: 100%; height: 100%;
+    border: 0; border-radius: 32px; background: #f7f9fc;
+  }
+
+  .rodape {
+    margin-top: 22px; max-width: 620px; text-align: center;
+    color: var(--fraco); font-size: 12.5px; line-height: 1.7;
+  }
+  .rodape b { color: var(--texto); }
+  code {
+    background: #0d1522; border: 1px solid var(--borda);
+    padding: 1px 6px; border-radius: 5px; font-size: 12px; color: #cfe0ff;
+  }
+  .medida { font-variant-numeric: tabular-nums; color: var(--fraco); font-size: 12px; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>IrisFlow — visão do cuidador</h1>
+<p class="sub">O app real, em dimensões de celular.</p>
+
+<div class="barra" id="barra"></div>
+
+<div class="aparelho" id="aparelho">
+  <div class="entalhe"></div>
+  <iframe id="tela" src="http://localhost:8081" title="App do cuidador"></iframe>
+</div>
+
+<div class="medida" id="medida"></div>
+
+<p class="rodape">
+  Isto é o <b>bundle web do mesmo código</b>, num viewport de celular — bom para
+  julgar layout, hierarquia e tamanho de alvo.
+  <br>
+  O que <b>só aparece em aparelho de verdade</b>: vibração da emergência,
+  os três canais de notificação do Android e o comportamento em tela
+  bloqueada. Para isso, use o Expo Go com o QR code do terminal.
+  <br><br>
+  Se a tela ficar em branco, confirme que o servidor está de pé em
+  <code>http://localhost:8081</code>.
+</p>
+
+<script>
+  // Viewports CSS reais. Pixel 4a entra de propósito: é o pior caso plausível
+  // entre cuidadores, e é nele que um alvo de 48 dp deixa de caber se o
+  // layout apertar.
+  const APARELHOS = [
+    { nome: 'iPhone 15 Pro', w: 393, h: 852 },
+    { nome: 'iPhone SE',     w: 375, h: 667 },
+    { nome: 'Pixel 8',       w: 412, h: 915 },
+    { nome: 'Pixel 4a',      w: 360, h: 780 },
+  ];
+
+  const barra    = document.getElementById('barra');
+  const aparelho = document.getElementById('aparelho');
+  const medida   = document.getElementById('medida');
+  let atual = 0;
+
+  function aplicar(i) {
+    atual = i;
+    const a = APARELHOS[i];
+    aparelho.style.width  = a.w + 'px';
+    aparelho.style.height = a.h + 'px';
+    medida.textContent = a.nome + ' — ' + a.w + ' × ' + a.h + ' px';
+    [...barra.querySelectorAll('button[data-i]')].forEach((b, j) =>
+      b.setAttribute('aria-pressed', String(j === i)));
+  }
+
+  APARELHOS.forEach((a, i) => {
+    const b = document.createElement('button');
+    b.textContent = a.nome;
+    b.dataset.i = i;
+    b.onclick = () => aplicar(i);
+    barra.appendChild(b);
+  });
+
+  const recarregar = document.createElement('button');
+  recarregar.textContent = '↻ Recarregar';
+  recarregar.onclick = () => {
+    const f = document.getElementById('tela');
+    f.src = f.src;
+  };
+  barra.appendChild(recarregar);
+
+  aplicar(0);
+</script>
+
+</body>
+</html>
